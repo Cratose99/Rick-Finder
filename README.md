@@ -1,1 +1,1 @@
-# Rick-Finder
+# friend-finder
