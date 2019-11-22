@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Rick Finder</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h1 class="text-center">Which Rick Character Are You</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="nameInput">Name</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+                <div class="form-group">
+                    <label for="questionOne">Could you drink all day?</label>
+                    <select class="form-control" id="questionOne">
+                        <option>1 Strongly Disagree</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5 Strongly Agree</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionTwo">Do You Like Pickles?</label>
+                    <select class="form-control" id="questionTwo">
+                        <option>1 Strongly Disagree</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5 Strongly Agree</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionThree">Do you think you are a average person?</label>
+                    <select class="form-control" id="questionThree">
+                        <option>1 Strongly Disagree</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5 Strongly Agree</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionFour">Do you like to party!?</label>
+                    <select class="form-control" id="questionFour">
+                        <option>1 Strongly Disagree</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5 Strongly Agree</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionFive">Do you have kids?</label>
+                    <select class="form-control" id="questionFive">
+                        <option>1 Strongly Disagree</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5 Strongly Agree</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionSix">Do you think you are supreme?</label>
+                    <select class="form-control" id="questionSix">
+                        <option>1 Strongly Disagree</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5 Strongly Agree</option>
+                    </select>
+                </div>
+                <button id="find-rick" type="button" class="btn btn-primary">Find a Rick!</button>
+            </div>
+        </div>
+    </div>
+    
+      
+      <!-- Modal -->
+      <div class="modal fade" id="matchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Rick Match</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="matchbody">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    let match;
+        $('#find-rick').click(function () {
+            //post object, compare to closest avenger
+            let newEntry = {
+                name: $('#nameInput').val(),
+                scores: [
+                    $('#questionOne').val(),
+                    $('#questionTwo').val(),
+                    $('#questionThree').val(),
+                    $('#questionFour').val(),
+                    $('#questionFive').val(),
+                    $('#questionSix').val()
+                ]
+            }
+            
+            $.post("/api/add-friend", newEntry, 
+            function(data) {
+                if(data){
+                    match = data;
+                    $('#matchbody').empty();
+                    let matchHeader = $("<h2>").text(match.name);
+                    let matchImage = $("<img>").attr("src",match.imageSource).attr("alt",match.alt);
+                    matchImage.attr("width",220);
+                    matchImage.attr("height",220);
+                    $('#matchbody').append(matchHeader, matchImage);
+                    $('#matchModal').modal();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
