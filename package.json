@@ -1,5 +1,5 @@
 {
-  "name": "friend-finder",
+  "name": "friendfinder",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cwheets/friend-finder.git"
+    "url": "git+https://github.com/okyfunoky/friendfinder.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cwheets/friend-finder/issues"
+    "url": "https://github.com/okyfunoky/friendfinder/issues"
   },
-  "homepage": "https://github.com/cwheets/friend-finder#readme",
+  "homepage": "https://github.com/okyfunoky/friendfinder#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "path": "^0.12.7"
+    "express": "^4.17.1"
   }
 }
